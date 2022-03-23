@@ -1,18 +1,44 @@
 
-let h1 = document.createElement("H1");
-let texto = document.createTextNode("Miguel Angel Castro Escamilla");
 
-h1.id = "MyId";
-h1.classList.add("colorH1");
 
-// h1.append(texto); //Javascript
-// h1.innerText = texto.nodeValue; //Javascript 2
-h1.insertAdjacentText("beforeend", texto.nodeValue);
+let enviar = async function(url){
+    let peticion = await fetch(url);
+    let json = await peticion.json();
+    let selecion = document.querySelector("body > table > tbody");
 
-// document.body.append(h1);//Javascript
-// document.body.innerHTML = h1.outerHTML; //Javascript 2
+    let tr = document.createElement("TR");
 
-document.body.insertAdjacentElement("afterbegin", h1);
+    let tdId = document.createElement("TD");
+    tdId.insertAdjacentText("beforeend", json.id);
+    let tdNom = document.createElement("TD");
+    tdNom.insertAdjacentText("beforeend", json.name);
 
-console.log(h1);
-console.dir(h1);
+    let tdImg= document.createElement("TD");
+    let Img= document.createElement("IMG");
+    Img.src = json.sprites.front_default;
+    tdImg.insertAdjacentElement("beforeend", Img);
+
+    tr.insertAdjacentElement("beforeend", tdId);
+    tr.insertAdjacentElement("beforeend", tdNom);
+
+
+    // puntos de ataque
+    ataque:
+    for(let value of json.stats){
+        if(value.stat.name == "attack"){
+            let tdAta = document.createElement("TD");
+            tdAta.insertAdjacentText("beforeend", value.base_stat);
+            tr.insertAdjacentElement("beforeend", tdAta);
+            break ataque;
+        }
+    }
+    tr.insertAdjacentElement("beforeend", tdImg);
+    selecion.insertAdjacentElement("beforeend", tr);
+}
+
+for (let i = 1; i <= 898; i++) {
+    enviar(`https://pokeapi.co/api/v2/pokemon/${i}`);
+}
+
+
+
