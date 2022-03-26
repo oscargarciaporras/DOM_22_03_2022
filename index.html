@@ -8,11 +8,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div>Caja 1</div>
-        <div>Caja 2</div>
-    </div>
-
+    <dialog class="mensaje">
+        <div class="containerP">
+            <p></p>
+        </div>
+        <button id="btnClose">Cerrar</button>
+    </dialog>
+    <form id="Myform" method="POST" action="comfenalco.com">
+        <label for="cedula">Cedula *</label>
+        <input id="cedula" type="number" required>
+        <label for="nombre">Nombre *</label>
+        <input id="nombre" type="text" required>
+        <label for="apellido">Apellido</label>
+        <input id="apellido" type="text">
+        <label for="edad">Edad</label>
+        <input id="edad" type="number">
+        <label for="email">Email *</label>
+        <input id="email" type="email" required>
+    </form>
+    <input type="submit" form="Myform" value="Guardar">
+    <button id="Listar">Listar</button>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="listaDatos"></tbody>
+    </table>
+    
     <script src="main.js"></script>
 </body>
 </html>
